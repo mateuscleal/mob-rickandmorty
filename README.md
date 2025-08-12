@@ -14,7 +14,7 @@ Este é um aplicativo Flutter desenvolvido para gerenciar informações dos epis
         - Foto
         - Nome
         - Espécie
-        - Statusgit push --force origin
+        - Status
 
 - **Favoritar/Desfavoritar Episódio**
     - Adicione ou remova episódios como favoritos.
