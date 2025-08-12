@@ -14,7 +14,6 @@ Este é um aplicativo Flutter desenvolvido para gerenciar informações dos epis
         - Foto
         - Nome
         - Espécie
-        - Status
 
 - **Favoritar/Desfavoritar Episódio**
     - Adicione ou remova episódios como favoritos.
