@@ -1,29 +1,12 @@
 import 'package:app/ui/_core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class EpisodeCard extends StatelessWidget {
-  const EpisodeCard({
-    super.key,
-    required this.title,
-    required this.date,
-    required this.numberCharacters,
-    required this.episode,
-    required this.imagePath,
-    required this.heroTag,
-    required this.markAsWatched,
-    required this.markAsFavorite,
-    required this.isWatched,
-    required this.isFavorite,
-  });
+import '../../../domain/models/episode.dart';
 
-  final String title;
-  final String date;
-  final int numberCharacters;
-  final String episode;
-  final String imagePath;
-  final String heroTag;
-  final bool isWatched;
-  final bool isFavorite;
+class EpisodeCard extends StatelessWidget {
+  const EpisodeCard({super.key, required this.episode, required this.markAsWatched, required this.markAsFavorite});
+
+  final Episode episode;
   final Function(int id) markAsWatched;
   final Function(int id) markAsFavorite;
 
@@ -34,7 +17,11 @@ class EpisodeCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(image: NetworkImage(imagePath), fit: BoxFit.fill, alignment: Alignment.topCenter),
+        image: DecorationImage(
+          image: NetworkImage(episode.imagePath),
+          fit: BoxFit.fill,
+          alignment: Alignment.topCenter,
+        ),
         boxShadow: [BoxShadow(color: Colors.grey.shade800, spreadRadius: 1, blurRadius: 7, offset: Offset(0, 3))],
       ),
       child: Stack(
@@ -60,13 +47,13 @@ class EpisodeCard extends StatelessWidget {
                 ],
               ),
               child: Text(
-                episode,
+                episode.episodeName,
                 style: TextStyle(fontSize: 14, height: 1.0, fontWeight: FontWeight.w600, color: Colors.white),
               ),
             ),
           ),
           Visibility(
-            visible: isWatched,
+            visible: episode.isWatched,
             child: Container(
               height: 230,
               decoration: BoxDecoration(
@@ -91,15 +78,15 @@ class EpisodeCard extends StatelessWidget {
                 children: [
                   const SizedBox(height: 8),
                   Text(
-                    title,
+                    episode.title,
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   Text(
-                    date,
+                    episode.date,
                     style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                   Text(
-                    'Number of characters: $numberCharacters',
+                    'Number of characters: ${episode.numberCharacters}',
                     style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ],
@@ -122,17 +109,17 @@ class EpisodeCard extends StatelessWidget {
                   itemBuilder: (context) => [
                     PopupMenuItem(
                       value: 1,
-                      onTap: () => markAsWatched(int.parse(heroTag) - 1),
+                      onTap: () => markAsWatched(int.parse(episode.id) - 1),
                       child: Row(
                         spacing: 10,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            isWatched ? 'Mark as Unwatched' : 'Mark as Watched',
+                            episode.isWatched ? 'Mark as Unwatched' : 'Mark as Watched',
                             style: TextStyle(color: Colors.white),
                           ),
                           Icon(
-                            isWatched ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                            episode.isWatched ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                             color: Colors.white,
                           ),
                         ],
@@ -140,18 +127,18 @@ class EpisodeCard extends StatelessWidget {
                     ),
                     PopupMenuItem(
                       value: 1,
-                      onTap: () => markAsFavorite(int.parse(heroTag) - 1),
+                      onTap: () => markAsFavorite(int.parse(episode.id) - 1),
                       child: Row(
                         spacing: 10,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            isFavorite ? 'Remove from Favorites' : 'Mark as Favorite',
+                            episode.isFavorite ? 'Remove from Favorites' : 'Mark as Favorite',
                             style: TextStyle(color: Colors.white),
                           ),
                           Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
-                            color: isFavorite ? Colors.red : Colors.white,
+                            episode.isFavorite ? Icons.favorite : Icons.favorite_border_outlined,
+                            color: episode.isFavorite ? Colors.red : Colors.white,
                           ),
                         ],
                       ),

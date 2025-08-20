@@ -4,6 +4,8 @@ import 'package:app/ui/home_episodes/widgets/episode_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../domain/models/episode.dart';
+
 class EpisodesScreen extends StatelessWidget {
   const EpisodesScreen({super.key});
 
@@ -51,14 +53,16 @@ class EpisodesScreen extends StatelessWidget {
                         Navigator.of(context).pushNamed(AppRoutes.episodeDetails);
                       },
                       child: EpisodeCard(
-                        heroTag: episode['id'],
-                        title: episode['name'],
-                        date: episode['air_date'],
-                        numberCharacters: episode['characters'].length,
-                        episode: episode['episode'],
-                        imagePath: episode['imagePath'],
-                        isWatched: episode['isWatched'],
-                        isFavorite: episode['isFavorite'],
+                        episode: Episode(
+                          id: episode['id'],
+                          title: episode['name'],
+                          date: episode['air_date'],
+                          numberCharacters: episode['characters'].length,
+                          episodeName: episode['episode'],
+                          imagePath: episode['imagePath'],
+                          isWatched: episode['isWatched'],
+                          isFavorite: episode['isFavorite'],
+                        ),
                         markAsFavorite: viewModel.toggleFavoriteStatus,
                         markAsWatched: viewModel.toggleWatchedStatus,
                       ),
