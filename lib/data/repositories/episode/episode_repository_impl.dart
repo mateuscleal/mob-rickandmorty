@@ -29,7 +29,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
           id: episode['id'],
           title: episode['name'],
           date: episode['air_date'],
-          numberCharacters: episode['characters'].length,
+          characters: episode['characters'].length,
           episodeName: episode['episode'],
           imagePath: episode['characters'][randomIndex]['image'],
           isFavorite: hiveData?[0] ?? false,
@@ -55,7 +55,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   }
 
   @override
-  Future<void> updateEpisodeStatus(int episodeId, bool isFavorite, bool isWatched, String imagePath) async {
+  Future<void> updateEpisodeStatus(int episodeId, bool? isFavorite, bool? isWatched, String imagePath) async {
     await HiveManager.setValue(episodeId, [isFavorite, isWatched, imagePath]);
   }
 }

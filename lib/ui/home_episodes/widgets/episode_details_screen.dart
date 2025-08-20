@@ -10,7 +10,8 @@ class EpisodeDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<EpisodesViewModel>(
-      builder: (_, viewModel, child) {
+      builder: (_, viewModel, child)  {
+        final episode = viewModel.episodes[viewModel.idReference].toMap();
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -36,7 +37,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       alignment: Alignment.topCenter,
-                      image: NetworkImage('${viewModel.episodes[viewModel.idReference]['imagePath']}'),
+                      image: NetworkImage('${episode['imagePath']}'),
                     ),
                   ),
                   child: Container(
@@ -58,7 +59,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Text(
-                                    '${viewModel.episodes[viewModel.idReference]['name']}',
+                                    '${episode['title']}',
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -68,7 +69,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '${viewModel.episodes[viewModel.idReference]['air_date']}',
+                                '${episode['date']}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -87,7 +88,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '${viewModel.episodes[viewModel.idReference]['episode']}',
+                                '${episode['episodeName']}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
@@ -109,7 +110,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
                     children: [
                       Image.asset('assets/images/characters.png', width: 170),
                       Text(
-                        'N°: ${viewModel.episodes[viewModel.idReference]['characters'].length}',
+                        'N°: ${episode['characters'].length}',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -121,9 +122,9 @@ class EpisodeDetailsScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: viewModel.episodes[viewModel.idReference]['characters'].length,
+                    itemCount: episode['characters'].length,
                     itemBuilder: (_, index) {
-                      final character = viewModel.episodes[viewModel.idReference]['characters'][index];
+                      final character = episode['characters'][index];
                       return CharacterCard(
                         imagePath: character['image'],
                         name: character['name'],

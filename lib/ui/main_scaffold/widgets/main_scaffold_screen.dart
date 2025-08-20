@@ -41,7 +41,7 @@ class MainScaffoldScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        episodesViewModel.filterEpisodes('');
+                        episodesViewModel.searchEpisodes('');
                         viewModel.getIndex(0);
                       },
                       child: BottomNavBarItems(
@@ -53,7 +53,7 @@ class MainScaffoldScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        episodesViewModel.filterEpisodes('');
+                        episodesViewModel.searchEpisodes('');
                         viewModel.getIndex(1);
                       },
                       child: BottomNavBarItems(
@@ -65,7 +65,7 @@ class MainScaffoldScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        episodesViewModel.filterEpisodes('');
+                        episodesViewModel.searchEpisodes('');
                         viewModel.getIndex(2);
                       },
                       child: BottomNavBarItems(

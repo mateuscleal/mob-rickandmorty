@@ -5,7 +5,7 @@ class Episode {
   final String title;
   final String imagePath;
   final String episodeName;
-  final int numberCharacters;
+  final List<dynamic> characters;
   final bool isWatched;
   final bool isFavorite;
 
@@ -15,7 +15,7 @@ class Episode {
     required this.title,
     required this.imagePath,
     required this.episodeName,
-    required this.numberCharacters,
+    required this.characters,
     this.isWatched = false,
     this.isFavorite = false,
   });
@@ -27,7 +27,7 @@ class Episode {
       title: title,
       imagePath: imagePath ?? this.imagePath,
       episodeName: episodeName,
-      numberCharacters: numberCharacters,
+      characters: characters,
       isWatched: isWatched ?? this.isWatched,
       isFavorite: isFavorite ?? this.isFavorite,
     );
@@ -38,7 +38,7 @@ class Episode {
       id: map['id'],
       title: map['name'],
       date: map['air_date'],
-      numberCharacters: map['characters'].length,
+      characters: map['characters'],
       episodeName: map['episode'],
       imagePath: hiveData[2] ?? map['characters'][0]['image'],
       isWatched: hiveData[0] ?? false,
@@ -53,7 +53,7 @@ class Episode {
       'title': title,
       'imagePath': imagePath,
       'episodeName': episodeName,
-      'numberCharacters': numberCharacters,
+      'characters': characters,
       'isWatched': isWatched,
       'isFavorite': isFavorite,
     };

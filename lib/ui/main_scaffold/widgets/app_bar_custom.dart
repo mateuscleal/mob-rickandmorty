@@ -38,7 +38,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
             children: [
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                width: widget.viewModel.isExpanded ? MediaQuery.of(context).size.width * 0.8 : 0,
+                width: viewModel.isExpanded ? MediaQuery.of(context).size.width * 0.8 : 0,
                 curve: Curves.easeInOut,
                 child: TextField(
                   focusNode: _focusNode,
@@ -59,7 +59,7 @@ class _AppBarCustomState extends State<AppBarCustom> {
                   onSubmitted: (value) async {
                     _focusNode.unfocus();
                     final scaffoldMessenger = ScaffoldMessenger.of(context);
-                    final flag = await widget.episodesViewModel.filterEpisodes(value);
+                    final flag = await widget.episodesViewModel.searchEpisodes(value);
                     if (!flag) {
                       scaffoldMessenger.clearSnackBars();
                       scaffoldMessenger.showSnackBar(
@@ -71,16 +71,16 @@ class _AppBarCustomState extends State<AppBarCustom> {
               ),
               IconButton(
                 icon: Icon(
-                  widget.viewModel.isExpanded ? Icons.close_outlined : Icons.search_outlined,
+                  viewModel.isExpanded ? Icons.close_outlined : Icons.search_outlined,
                   color: AppColors.secondary,
                 ),
                 onPressed: () {
-                  widget.viewModel.toggleSearch();
-                  if (widget.viewModel.isExpanded) {
+                  viewModel.toggleSearch();
+                  if (viewModel.isExpanded) {
                     _controller.clear();
                   }
                   _focusNode.unfocus();
-                  widget.episodesViewModel.filterEpisodes('');
+                  widget.episodesViewModel.searchEpisodes('');
                 },
               ),
             ],

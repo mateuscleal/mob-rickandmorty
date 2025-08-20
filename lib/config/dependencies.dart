@@ -17,7 +17,7 @@ List<SingleChildWidget> providers = [
     update: (context, graphql, hive, _) => EpisodeRepositoryImpl(graphql, hive),
   ),
   ChangeNotifierProxyProvider<EpisodeRepositoryImpl, EpisodesViewModel>(
-    create: (_) => EpisodesViewModel(EpisodeRepositoryImpl(GraphQLService(), HiveManager())),
-    update: (_, repo, _) => EpisodesViewModel(repo),
+    create: (_) => EpisodesViewModel(),
+    update: (_, repo, viewModel) => viewModel!..initRepository(repo),
   ),
 ];

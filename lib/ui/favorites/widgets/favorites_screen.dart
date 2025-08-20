@@ -13,7 +13,7 @@ class FavoritesScreen extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: Consumer<EpisodesViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.isLoading) {
+          if (viewModel.loading) {
             return Center(child: CircularProgressIndicator());
           }
 
@@ -32,18 +32,18 @@ class FavoritesScreen extends StatelessWidget {
                     if (index == viewModel.favoriteEpisodes.length) {
                       return SizedBox(height: 80);
                     }
-                    final favoriteEpisodes = viewModel.favoriteEpisodes[index];
+                    final episode = viewModel.favoriteEpisodes[index].toMap();
                     return GestureDetector(
                       onTap: () {
-                        viewModel.setReference(int.parse(favoriteEpisodes['id']) - 1);
+                        viewModel.setReference(int.parse(episode['id']) - 1);
                         Navigator.of(context).pushNamed(AppRoutes.episodeDetails);
                       },
                       child: SimpleEpisodeCard(
-                        title: favoriteEpisodes['name'],
-                        date: favoriteEpisodes['air_date'],
-                        episode: favoriteEpisodes['episode'],
-                        imagePath: favoriteEpisodes['imagePath'],
-                        numberCharacters: favoriteEpisodes['characters'].length.toString(),
+                        title: episode['name'],
+                        date: episode['date'],
+                        episode: episode['episodeName'],
+                        imagePath: episode['imagePath'],
+                        numberCharacters: episode['characters'].length.toString(),
                       ),
                     );
                   },

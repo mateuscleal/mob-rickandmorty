@@ -15,7 +15,7 @@ class EpisodesScreen extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 20),
       child: Consumer<EpisodesViewModel>(
         builder: (context, viewModel, child) {
-          if (viewModel.isLoading) {
+          if (viewModel.loading) {
             return Center(child: CircularProgressIndicator());
           }
 
@@ -46,7 +46,7 @@ class EpisodesScreen extends StatelessWidget {
                       return SizedBox(height: 80);
                     }
 
-                    final episode = viewModel.episodes[index];
+                    final episode = viewModel.episodes[index].toMap();
                     return GestureDetector(
                       onTap: () {
                         viewModel.setReference(int.parse(episode['id']) - 1);
@@ -55,16 +55,16 @@ class EpisodesScreen extends StatelessWidget {
                       child: EpisodeCard(
                         episode: Episode(
                           id: episode['id'],
-                          title: episode['name'],
-                          date: episode['air_date'],
-                          numberCharacters: episode['characters'].length,
-                          episodeName: episode['episode'],
+                          date: episode['date'],
+                          title: episode['title'],
+                          characters: episode['characters'].length,
+                          episodeName: episode['episodeName'],
                           imagePath: episode['imagePath'],
                           isWatched: episode['isWatched'],
                           isFavorite: episode['isFavorite'],
                         ),
-                        markAsFavorite: viewModel.toggleFavoriteStatus,
-                        markAsWatched: viewModel.toggleWatchedStatus,
+                        markAsFavorite: viewModel.toggleFavorite,
+                        markAsWatched: viewModel.toggleWatched,
                       ),
                     );
                   },
