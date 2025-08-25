@@ -1,21 +1,11 @@
+import 'package:app/domain/models/episode.dart';
 import 'package:app/ui/_core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SimpleEpisodeCard extends StatelessWidget {
-  const SimpleEpisodeCard({
-    super.key,
-    required this.title,
-    required this.date,
-    required this.numberCharacters,
-    required this.episode,
-    required this.imagePath,
-  });
+  const SimpleEpisodeCard({super.key, required this.episode});
 
-  final String title;
-  final String date;
-  final String numberCharacters;
-  final String episode;
-  final String imagePath;
+  final Episode episode;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +38,7 @@ class SimpleEpisodeCard extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         TextSpan(
-                          text: episode,
+                          text: episode.episodeName,
                           style: TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -62,7 +52,7 @@ class SimpleEpisodeCard extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         TextSpan(
-                          text: title,
+                          text: episode.title,
                           style: TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -76,7 +66,7 @@ class SimpleEpisodeCard extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         TextSpan(
-                          text: date,
+                          text: episode.date,
                           style: TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -90,7 +80,7 @@ class SimpleEpisodeCard extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                         ),
                         TextSpan(
-                          text: numberCharacters,
+                          text: episode.characters.length.toString(),
                           style: TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -106,7 +96,7 @@ class SimpleEpisodeCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(image: NetworkImage(imagePath), fit: BoxFit.cover),
+                image: DecorationImage(image: NetworkImage(episode.imagePath), fit: BoxFit.cover),
               ),
             ),
           ),
