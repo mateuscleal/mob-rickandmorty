@@ -14,7 +14,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   EpisodeRepositoryImpl(this._graphqlService, this._hiveManager);
 
   @override
-  Future<List<Episode>> getEpisodes() async {
+  Future<List<dynamic>> fetchAllEpisodes() async {
     try {
       final result = await _graphqlService.executeQuery(queries['getEpisodes']);
       if (result.hasException) {
@@ -29,7 +29,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
           id: episode['id'],
           title: episode['name'],
           date: episode['air_date'],
-          characters: episode['characters'].length,
+          characters: episode['characters'],
           episodeName: episode['episode'],
           imagePath: episode['characters'][randomIndex]['image'],
           isFavorite: hiveData?[0] ?? false,
@@ -42,7 +42,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   }
 
   @override
-  Future<List<Episode>> searchEpisodes(String name) async {
+  Future<List<dynamic>> searchEpisodes(String name) async {
     final result = await _graphqlService.executeQuery(queries['getFilteredEpisodes'], variables: {'name': name});
     final data = result.data?['episodes']['results'] ?? [];
     return List<Episode>.from(
@@ -55,7 +55,7 @@ class EpisodeRepositoryImpl implements EpisodeRepository {
   }
 
   @override
-  Future<void> updateEpisodeStatus(int episodeId, bool? isFavorite, bool? isWatched, String imagePath) async {
+  Future<void> updateEpisodeStatus(int episodeId, bool isFavorite, bool isWatched, String imagePath) async {
     await HiveManager.setValue(episodeId, [isFavorite, isWatched, imagePath]);
   }
 }
