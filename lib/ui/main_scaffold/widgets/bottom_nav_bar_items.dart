@@ -30,7 +30,11 @@ class BottomNavBarItems extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(icon, color: Colors.black.withValues(alpha: 0.65), size: 24),
-          Text(title, textAlign: TextAlign.center, style: TextStyle(height: 1.2,color: Colors.black, fontSize: 12)),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(height: 1.2, color: Colors.black, fontSize: 12),
+          ),
         ],
       ),
     );

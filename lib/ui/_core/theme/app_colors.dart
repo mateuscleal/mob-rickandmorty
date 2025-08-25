@@ -10,4 +10,3 @@ class AppColors {
   static const Color textSecondary = Color(0xFFB3B3B3); // Cinza claro
   static const Color buttonColor = Color(0xFF2A87D4); // Azul para botões
 }
-
