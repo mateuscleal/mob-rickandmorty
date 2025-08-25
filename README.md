@@ -43,7 +43,7 @@ Este é um aplicativo Flutter desenvolvido para gerenciar informações dos epis
 
 Para reproduzir ou trabalhar neste projeto, é necessário ter o seguinte ambiente configurado:
 
-- **Gradle**: Versão 8.11.0.
+- **Gradle**: Versão 8.12.1.
 - **Android Studio**: Narwhal | 2025.1.1.
 - **Flutter**: Versão utilizada no projeto, **3.32.5**
 - **Dart SDK**: Versão utilizada no projeto, **3.8.1**
