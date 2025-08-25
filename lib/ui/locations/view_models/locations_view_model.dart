@@ -1,28 +1,22 @@
-import 'package:app/data/graphql/graphql_queries.dart';
-import 'package:app/data/services/graphql_service.dart';
+import 'package:app/data/repositories/location/location_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 class LocationsViewModel extends ChangeNotifier {
-
-  final GraphQLService _graphqlService = GraphQLService();
-
-
   int _idReference = 0;
+  bool _loading = false;
   List<dynamic> _locations = [];
+  late LocationRepositoryImpl _repository;
 
+  bool get loading => _loading;
 
   int get idReference => _idReference;
+
   List<dynamic> get locations => _locations;
 
-  Future<void> fetchLocations() async {
-    final query = queries['getLocations'];
-    try {
-      final result = await _graphqlService.executeQuery(query);
-      if (result.hasException) throw result.exception!;
-      _locations = result.data?['locations']['results'] ?? [];
-    } catch (e) {
-      debugPrint("Error fetching locations: $e");
-    }
+  void initRepository(LocationRepositoryImpl repository) {
+    _repository = repository;
+    fetchLocations();
+    notifyListeners();
   }
 
   void setReference(int id) {
@@ -30,4 +24,11 @@ class LocationsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> fetchLocations() async {
+    _loading = true;
+    notifyListeners();
+    _locations = await _repository.fetchAllEpisodes();
+    _loading = false;
+    notifyListeners();
+  }
 }

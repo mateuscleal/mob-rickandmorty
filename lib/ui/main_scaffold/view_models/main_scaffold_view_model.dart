@@ -15,7 +15,9 @@ class MainScaffoldViewModel extends ChangeNotifier {
   final List<Widget> _views = [LocationsScreen(), EpisodesScreen(), FavoritesScreen()];
 
   bool get isExpanded => _isExpanded;
+
   int get currentIndex => _currentIndex;
+
   Widget get currentView => _views[_currentIndex];
 
   void getIndex(int index) {
