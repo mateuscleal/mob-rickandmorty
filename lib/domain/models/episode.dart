@@ -1,4 +1,3 @@
-
 class Episode {
   final String id;
   final String date;
@@ -20,16 +19,16 @@ class Episode {
     this.isFavorite = false,
   });
 
-  Episode copyWith({String? imagePath, bool? isWatched, bool? isFavorite}) {
+  Episode copyWith({bool? isWatched, bool? isFavorite}) {
     return Episode(
       id: id,
       date: date,
       title: title,
-      imagePath: imagePath ?? this.imagePath,
+      imagePath: imagePath,
       episodeName: episodeName,
       characters: characters,
-      isWatched: isWatched ?? this.isWatched,
-      isFavorite: isFavorite ?? this.isFavorite,
+      isWatched: isWatched == null ? this.isWatched : !this.isWatched,
+      isFavorite: isFavorite == null ? this.isFavorite : !this.isFavorite,
     );
   }
 
@@ -40,9 +39,9 @@ class Episode {
       date: map['air_date'],
       characters: map['characters'],
       episodeName: map['episode'],
-      imagePath: hiveData[2] ?? map['characters'][0]['image'],
-      isWatched: hiveData[0] ?? false,
-      isFavorite: hiveData[1] ?? false,
+      imagePath: hiveData?[2] ?? map['characters'][0]['image'],
+      isWatched: hiveData?[0] ?? false,
+      isFavorite: hiveData?[1] ?? false,
     );
   }
 
