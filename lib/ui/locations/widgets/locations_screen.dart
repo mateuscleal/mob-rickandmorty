@@ -13,6 +13,17 @@ class LocationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LocationsViewModel>(
       builder: (_, viewModel, child) {
+
+        if (viewModel.loading) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (viewModel.locations.isEmpty) {
+          return const Center(
+            child: Text('No locations found.', style: TextStyle(color: Colors.white)),
+          );
+        }
+
         return Column(
           children: [
             Divider(),

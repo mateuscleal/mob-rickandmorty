@@ -5,7 +5,7 @@ class Location {
   final String name;
   final String type;
   final String dimension;
-  final List<Resident> residents;
+  final List<dynamic> residents;
 
   Location({
     required this.id,
