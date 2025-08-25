@@ -1,3 +1,4 @@
+import 'package:app/domain/models/resident.dart';
 import 'package:app/ui/_core/theme/app_colors.dart';
 import 'package:app/ui/locations/view_models/locations_view_model.dart';
 import 'package:app/ui/locations/widgets/residents_card.dart';
@@ -19,17 +20,16 @@ class LocationsResidentsScreen extends StatelessWidget {
       ),
       body: Consumer<LocationsViewModel>(
         builder: (_, viewModel, child) {
-
-          if (viewModel.locations[viewModel.idReference]['residents'].length == 0) {
+          final residents = viewModel.locations[viewModel.idReference]['residents'];
+          if (residents.isEmpty) {
             return Center(
               child: Text('No residents found', style: TextStyle(fontSize: 20, color: AppColors.secondary)),
             );
           }
           return ListView.builder(
-            itemCount: viewModel.locations[viewModel.idReference]['residents'].length,
+            itemCount: residents.length,
             itemBuilder: (_, index) {
-              final resident = viewModel.locations[viewModel.idReference]['residents'][index];
-              return ResidentsCard(imagePath: resident['image'], name: resident['name']);
+              return ResidentsCard(resident: Resident.fromMap(residents[index]));
             },
           );
         },

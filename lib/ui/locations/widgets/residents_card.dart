@@ -1,15 +1,11 @@
+import 'package:app/domain/models/resident.dart';
 import 'package:app/ui/_core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ResidentsCard extends StatelessWidget {
-  const ResidentsCard({
-    super.key,
-    required this.name,
-    required this.imagePath,
-  });
+  const ResidentsCard({super.key, required this.resident});
 
-  final String name;
-  final String imagePath;
+  final Resident resident;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class ResidentsCard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.accent),
-                image: DecorationImage(image: NetworkImage(imagePath)),
+                image: DecorationImage(image: NetworkImage(resident.image)),
               ),
             ),
           ),
@@ -48,7 +44,7 @@ class ResidentsCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Name: $name", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  Text("Name: ${resident.name}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
