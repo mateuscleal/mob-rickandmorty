@@ -22,6 +22,13 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
+  firebase_core: ^4.0.0
+  firebase_analytics: ^12.0.0
+  firebase_crashlytics: ^5.0.0
+  firebase_auth: ^6.0.1
+  firebase_messaging: ^16.0.0
+  cloud_firestore: ^6.0.0
+
   image_picker: ^1.1.2
 
 dev_dependencies:
