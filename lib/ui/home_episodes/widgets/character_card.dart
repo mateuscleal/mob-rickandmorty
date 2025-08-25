@@ -24,14 +24,7 @@ class CharacterCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white70,
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.white70, spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
       ),
       child: Row(
         children: [

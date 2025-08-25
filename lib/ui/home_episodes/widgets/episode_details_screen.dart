@@ -1,5 +1,5 @@
 import 'package:app/ui/_core/theme/app_colors.dart';
-import 'package:app/ui/home_episodes/view_models/episodes_view_model.dart';
+import 'package:app/ui/_core/view_models/episodes_view_model.dart';
 import 'package:app/ui/home_episodes/widgets/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class EpisodeDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<EpisodesViewModel>(
-      builder: (_, viewModel, child)  {
+      builder: (_, viewModel, child) {
         final episode = viewModel.episodes[viewModel.idReference].toMap();
         return Scaffold(
           appBar: AppBar(

@@ -1,5 +1,5 @@
 import 'package:app/routing/app_routes.dart';
-import 'package:app/ui/home_episodes/view_models/episodes_view_model.dart';
+import 'package:app/ui/_core/view_models/episodes_view_model.dart';
 import 'package:app/ui/home_episodes/widgets/episode_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,24 +45,14 @@ class EpisodesScreen extends StatelessWidget {
                     if (index == viewModel.episodes.length) {
                       return SizedBox(height: 80);
                     }
-
-                    final episode = viewModel.episodes[index].toMap();
+                    final Episode episode = viewModel.episodes[index];
                     return GestureDetector(
                       onTap: () {
-                        viewModel.setReference(int.parse(episode['id']) - 1);
+                        viewModel.setReference(int.parse(episode.id) - 1);
                         Navigator.of(context).pushNamed(AppRoutes.episodeDetails);
                       },
                       child: EpisodeCard(
-                        episode: Episode(
-                          id: episode['id'],
-                          date: episode['date'],
-                          title: episode['title'],
-                          characters: episode['characters'].length,
-                          episodeName: episode['episodeName'],
-                          imagePath: episode['imagePath'],
-                          isWatched: episode['isWatched'],
-                          isFavorite: episode['isFavorite'],
-                        ),
+                        episode: episode,
                         markAsFavorite: viewModel.toggleFavorite,
                         markAsWatched: viewModel.toggleWatched,
                       ),
