@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveManager {
   static const String _boxName = 'hiveManager';
-  static final Map<int, List < bool>> _listKv = {};
+  static final Map<int, List<dynamic>> _listKv = {};
 
   Map<int, List<dynamic>> get listKv => _listKv;
 
@@ -21,7 +21,7 @@ class HiveManager {
     }
   }
 
-  static Future<void> setValue(int key, List <dynamic> value) async {
+  static Future<void> setValue(int key, List<dynamic> value) async {
     final box = Hive.box(_boxName);
     await box.put(key, value);
   }
